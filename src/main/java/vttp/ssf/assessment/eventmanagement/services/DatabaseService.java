@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.StringReader;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +62,9 @@ public class DatabaseService {
         return true;
     }
 
-    public Boolean ofAge(LocalDate birthDate){
-        return (birthDate.equals(LocalDate.now().minusYears(21)) || birthDate.isBefore(LocalDate.now().minusYears(21)));
+    public Boolean ofAge(LocalDate birthDate, Event event){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate eventDate = LocalDate.parse(event.getEventDateString(), formatter);
+        return (birthDate.equals(eventDate.minusYears(21)) || birthDate.isBefore(eventDate.minusYears(21)));
     }
 }

@@ -44,7 +44,7 @@ public class RegistrationController {
             return mav;
         }
 
-        if (!dbSvc.ofAge(registration.getBirthDate())){
+        if (!dbSvc.ofAge(registration.getBirthDate(), dbSvc.getEvent(eventId))){
             mav.setViewName("registererror");
             mav.addObject("error", "You must be 21 years old or older to register for the event.");
             return mav;
