@@ -45,7 +45,7 @@ public class RegistrationController {
         }
 
         if (!dbSvc.ofAge(registration.getBirthDate())){
-            mav.setViewName("error");
+            mav.setViewName("registererror");
             mav.addObject("error", "You must be 21 years old or older to register for the event.");
             return mav;
         }
@@ -53,7 +53,7 @@ public class RegistrationController {
         Boolean registered = dbSvc.registerParticipant(eventId, registration.getTicketsRequested());
         
         if (!registered){
-            mav.setViewName("error");
+            mav.setViewName("registererror");
             mav.addObject("error", "Your request for tickets exceeded the event size.");
             return mav;
         }
